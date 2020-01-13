@@ -1,2 +1,18 @@
 <!-- <video #video></video> -->
-<video #video autoplay playsinline></video>
+<label >
+  <input type="checkbox" [checked]="blur" (change)="blur = !blur">BLUR
+</label>
+<label >
+  <input type="checkbox" [checked]="sepia" (change)="sepia = !sepia">SEPIA
+</label>
+<label >
+  <input type="checkbox" [checked]="invert" (change)="invert = !invert">INVERT
+</label>
+<label >
+  <input type="checkbox" [checked]="flip" (change)="flip = !flip">FLIT
+</label>
+
+<br>
+<br>
+
+<video #video autoplay playsinline [ngStyle]="getStyles()"></video>

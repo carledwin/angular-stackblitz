@@ -8,6 +8,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class CameraComponent implements OnInit {
 
   @ViewChild('video', {static: true}) video;
+  blur: boolean;
+  sepia: boolean;
+  invert: boolean;
+  flip: boolean;
 
   constructor() { }
 
@@ -17,11 +21,35 @@ export class CameraComponent implements OnInit {
     
     navigator.mediaDevices
       .getUserMedia({
-        video: {facingMode: 'user'}
+        video: {facingMode: 'client'}
       })
       .then(stream =>{
         videoElement.srcObject = stream;
       });
+  }
+
+  getStyles() {
+
+    let filter = '';
+    let transform = '';
+
+    if(this.blur){
+      filter += 'blur(5px)';
+    }
+
+    if(this.sepia){
+      filter += 'sepia(50%)';
+    }
+
+    if(this.invert){
+      filter += 'invert(1)';
+    }
+
+    if(this.flip){
+      transform += 'scaleX(-1)';
+    }
+
+    return {filter, transform};
   }
 
 }
